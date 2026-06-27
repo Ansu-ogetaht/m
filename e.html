@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ for my girl · eternal crush</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0b0a0c;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Quicksand', sans-serif;
+      padding: 20px;
+    }
+    .love-card {
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(20, 18, 22, 0.65);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 70px 70px 40px 40px;
+      padding: 30px 30px 40px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255, 200, 220, 0.15) inset;
+      border: 1px solid rgba(255, 140, 180, 0.2);
+      transition: all 0.3s ease;
+    }
+    #loginScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .login-profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ff7caa;
+      box-shadow: 0 0 50px #ff3b7f77;
+      margin-bottom: 20px;
+      background: #1f151b;
+    }
+    .login-icon { font-size: 90px; color: #ff99bb; text-shadow: 0 0 30px #ff3b7f; margin-bottom: 5px; }
+    .login-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 3.8rem;
+      background: linear-gradient(135deg, #ffb6d9, #ff6f9f, #ffb6d9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+    }
+    .login-sub { color: #ddb6c9; font-weight: 300; letter-spacing: 6px; font-size: 1rem; text-transform: uppercase; margin-bottom: 25px; }
+    .login-box {
+      background: rgba(255, 230, 240, 0.05);
+      padding: 35px 30px;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 150, 200, 0.2);
+      width: 100%;
+      max-width: 420px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 18px 24px;
+      margin: 10px 0;
+      background: rgba(10, 8, 12, 0.7);
+      border: 1px solid rgba(255, 120, 170, 0.4);
+      border-radius: 60px;
+      color: #ffeef4;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+    .login-box input:focus { border-color: #ff7caa; box-shadow: 0 0 20px #ff3b7f55; background: rgba(20, 10, 18, 0.8); }
+    .login-box input::placeholder { color: #a07a88; font-weight: 300; }
+    .login-btn {
+      width: 100%;
+      padding: 18px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #ff3b7f, #ff7caa);
+      border: none;
+      border-radius: 60px;
+      color: #130e12;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 24px #ff3b7f55;
+    }
+    .login-btn:hover { transform: scale(1.02); box-shadow: 0 0 40px #ff3b7faa; background: linear-gradient(135deg, #ff5a8f, #ff99bb); }
+    .login-hint { margin-top: 20px; color: #b28b99; font-size: 0.85rem; letter-spacing: 1px; }
+    #dashboard { display: none; animation: fadeGlow 1s ease; }
+    @keyframes fadeGlow { 0% { opacity: 0; transform: scale(0.96); filter: blur(4px); } 100% { opacity: 1; transform: scale(1); filter: blur(0); } }
+    .profile-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid rgba(255, 140, 180, 0.2);
+      margin-bottom: 30px;
+    }
+    .profile-pic-section { display: flex; align-items: center; gap: 25px; }
+    .profile-pic {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ff7caa;
+      box-shadow: 0 0 30px #ff3b7f77;
+      background: #1f151b;
+    }
+    .profile-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.4rem;
+      color: #ffd9e6;
+      text-shadow: 0 0 20px #ff3b7f55;
+    }
+    .profile-name small { font-size: 1rem; font-weight: 300; color: #cfa3b5; display: block; font-family: 'Quicksand', sans-serif; letter-spacing: 3px; }
+    .affection-counter {
+      background: rgba(255, 70, 120, 0.2);
+      padding: 12px 28px;
+      border-radius: 60px;
+      border: 1px solid #ff7caa55;
+      font-size: 1.2rem;
+      color: #ffc1d4;
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+    }
+    .affection-counter i { color: #ff3b7f; font-size: 1.8rem; }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 22px;
+      margin: 30px 0 25px;
+    }
+    .feature-item {
+      background: rgba(30, 22, 28, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 22px 10px 18px;
+      text-align: center;
+      border: 1px solid rgba(255, 150, 190, 0.15);
+      transition: 0.25s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .feature-item:hover { transform: translateY(-8px); border-color: #ff7caa; box-shadow: 0 0 30px #ff3b7f44, 0 10px 30px #00000066; background: rgba(50, 30, 40, 0.7); }
+    .feature-item i { font-size: 2.8rem; color: #ff99bb; margin-bottom: 10px; display: block; text-shadow: 0 0 20px #ff3b7f66; }
+    .feature-item h4 { font-size: 0.95rem; color: #fad4e2; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .feature-item p { font-size: 0.7rem; color: #b48b9b; font-weight: 300; }
+    .romantic-extra {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 30px;
+      background: rgba(255, 80, 130, 0.05);
+      border-radius: 60px;
+      padding: 25px 25px;
+      border: 1px dashed #ff7caa55;
+    }
+    .quote-box { flex: 2; min-width: 200px; }
+    .quote-box i { color: #ff7caa; font-size: 1.6rem; margin-right: 12px; }
+    .quote-box span { font-size: 1.3rem; font-style: italic; color: #f5d4e2; font-weight: 300; letter-spacing: 0.5px; }
+    .love-meter { flex: 1; min-width: 140px; display: flex; align-items: center; gap: 14px; justify-content: flex-end; }
+    .meter-bar { width: 120px; height: 8px; background: #2d1f26; border-radius: 20px; overflow: hidden; }
+    .meter-fill { height: 100%; width: 96%; background: linear-gradient(90deg, #ff3b7f, #ff99bb); border-radius: 20px; box-shadow: 0 0 20px #ff3b7f; }
+    .love-meter i { color: #ff3b7f; font-size: 1.8rem; }
+    .logout-btn {
+      background: transparent;
+      border: 1px solid #ff7caa55;
+      color: #ddb6c9;
+      padding: 12px 30px;
+      border-radius: 60px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 0.9rem;
+      backdrop-filter: blur(4px);
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logout-btn:hover { background: #ff3b7f33; border-color: #ff7caa; color: #fff0f5; box-shadow: 0 0 30px #ff3b7f44; }
+    .footer-love { text-align: right; color: #7a5a68; font-size: 0.75rem; letter-spacing: 2px; margin-top: 25px; border-top: 1px solid rgba(255, 140, 180, 0.1); padding-top: 20px; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-overlay.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal-content {
+      background: rgba(20, 18, 22, 0.95);
+      border-radius: 60px;
+      max-width: 650px;
+      width: 92%;
+      padding: 30px 30px 40px;
+      border: 1px solid rgba(255, 140, 180, 0.3);
+      box-shadow: 0 0 80px #ff3b7f33;
+      max-height: 80vh;
+      overflow-y: auto;
+      color: #f5d4e2;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 2rem;
+      color: #ff7caa;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .modal-close:hover { transform: rotate(90deg); color: #ff3b7f; }
+    .modal-content h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 20px; color: #ffd9e6; }
+    .modal-content .item-list { display: flex; flex-direction: column; gap: 15px; }
+    .modal-content .item-entry {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: rgba(255, 230, 240, 0.05);
+      padding: 14px 20px;
+      border-radius: 40px;
+      border: 1px solid rgba(255, 150, 190, 0.15);
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .modal-content .item-entry:hover { background: rgba(255, 70, 120, 0.15); border-color: #ff7caa; }
+    .modal-content .item-entry img {
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      object-fit: cover;
+      border: 2px solid #ff7caa;
+    }
+    .modal-content .item-entry .info { flex: 1; }
+    .modal-content .item-entry .info h4 { font-size: 1.1rem; color: #fad4e2; }
+    .modal-content .item-entry .info p { font-size: 0.85rem; color: #b48b9b; }
+    .modal-content .item-entry i { font-size: 1.8rem; color: #ff7caa; }
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 10px 0;
+    }
+    .modal-gallery .gallery-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 30px;
+      border: 2px solid rgba(255, 140, 180, 0.3);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .modal-gallery .gallery-img:hover { transform: scale(1.05); border-color: #ff7caa; box-shadow: 0 0 30px #ff3b7f44; }
+    .modal-content .song-player { display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.3); padding: 12px 20px; border-radius: 60px; margin-top: 8px; }
+    .modal-content .song-player button { background: #ff3b7f; border: none; border-radius: 40px; padding: 8px 22px; color: #130e12; font-weight: bold; cursor: pointer; transition: 0.3s; }
+    .modal-content .song-player button:hover { background: #ff7caa; box-shadow: 0 0 30px #ff3b7f; }
+    .letter-text { 
+      background: rgba(255, 230, 240, 0.05); 
+      padding: 20px; 
+      border-radius: 30px; 
+      border-left: 4px solid #ff7caa;
+      margin: 10px 0;
+      font-style: italic;
+      line-height: 1.8;
+      color: #f5d4e2;
+    }
+    .days-counter {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: rgba(255, 70, 120, 0.1);
+      padding: 20px;
+      border-radius: 40px;
+      border: 1px solid #ff7caa33;
+    }
+    .days-counter .time-unit { text-align: center; }
+    .days-counter .time-unit .number { font-size: 2.5rem; font-weight: 700; color: #ff7caa; }
+    .days-counter .time-unit .label { font-size: 0.8rem; color: #b48b9b; text-transform: uppercase; letter-spacing: 2px; }
+    .fullscreen-img {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      cursor: pointer;
+    }
+    .fullscreen-img.active { display: flex; }
+    .fullscreen-img img { max-width: 90%; max-height: 90%; border-radius: 30px; border: 3px solid #ff7caa; box-shadow: 0 0 60px #ff3b7f55; }
+    .audio-player {
+      width: 100%;
+      margin-top: 10px;
+    }
+    .audio-player audio {
+      width: 100%;
+      border-radius: 40px;
+      background: rgba(255, 230, 240, 0.1);
+    }
+    .surprise-box {
+      background: linear-gradient(135deg, #ff3b7f22, #ff7caa22);
+      padding: 20px;
+      border-radius: 40px;
+      border: 2px solid #ff7caa55;
+      text-align: center;
+    }
+    .surprise-box i { font-size: 4rem; color: #ff7caa; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    @media (max-width: 650px) { .profile-header { flex-direction: column; align-items: start; } .affection-counter { width: 100%; justify-content: center; } .feature-grid { grid-template-columns: repeat(2, 1fr); } .modal-gallery { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+<div class="love-card" id="appContainer">
+
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <img class="login-profile-pic" src="pics/meme.png" alt="profile">
+    <div class="login-icon"><i class="fas fa-heart"></i></div>
+    <div class="login-title">for my girl</div>
+    <div class="login-sub">· only you ·</div>
+    <div class="login-box">
+      <input type="text" id="usernameInput" placeholder="your name, baby" value="babe">
+      <input type="password" id="passwordInput" placeholder="our secret" value="love">
+      <button class="login-btn" id="loginBtn"><i class="fas fa-arrow-right" style="margin-right: 10px;"></i> enter</button>
+      <div class="login-hint"><i class="fas fa-lock"></i> just type anything · it's for you <i class="fas fa-heart" style="color:#ff3b7f;"></i></div>
+    </div>
+  </div>
+
+
+  <!-- DASHBOARD -->
+  <div id="dashboard">
+    <div class="profile-header">
+      <div class="profile-pic-section">
+        <img class="profile-pic" src="pics/meme.png" alt="profile">
+        <div class="profile-name">
+          my baby girl <small>✨ 4ever</small>
+        </div>
+      </div>
+      <div class="affection-counter" id="affectionDisplay">
+        <i class="fas fa-heart"></i> <span id="affectionCount">2,719</span> ❤️
+      </div>
+    </div>
+
+
+
+<!-- The Audio Element -->
+<audio id="backgroundAudio" loop>
+  <source src="songs/New West - Those Eyes (Lyrics).mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- Control Buttons -->
+<button id="playBtn">▶ Play Background Music</button>
+<button id="stopBtn">⏹ Stop Music</button>
+
+<!-- The JavaScript -->
+<script>
+  const audio = document.getElementById('backgroundAudio');
+  const playBtn = document.getElementById('playBtn');
+  const stopBtn = document.getElementById('stopBtn');
+
+  playBtn.addEventListener('click', function() {
+    audio.play().catch(error => {
+      console.log("Playback prevented: ", error);
+    });
+    playBtn.textContent = '🔊 Playing...';
+    playBtn.disabled = true;
+  });
+
+  stopBtn.addEventListener('click', function() {
+    audio.pause();
+    audio.currentTime = 0; // Rewinds to the start
+    playBtn.textContent = '▶ Play Background Music';
+    playBtn.disabled = false;
+  });
+</script>
+
+
+
+
+
+
+
+
+    <div class="feature-grid" id="featureGrid"></div>
+
+    <div class="romantic-extra">
+      <div class="quote-box">
+        <i class="fas fa-quote-left"></i>
+        <span id="rotatingQuote">you are my universe</span>
+      </div>
+      <div class="love-meter">
+        <i class="fas fa-fire"></i>
+        <div class="meter-bar"><div class="meter-fill" style="width: 98%;"></div></div>
+        <span style="color:#f5c4d4; font-weight:300;">∞</span>
+      </div>
+    </div>
+    <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> return to login</button>
+    <div class="footer-love">❤️  made with infinite love  ❤️</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content" id="modalContent">
+    <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+    <h2 id="modalTitle">✨ feature</h2>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- FULLSCREEN IMAGE -->
+<div class="fullscreen-img" id="fullscreenImg">
+  <img id="fullscreenImgSrc" src="" alt="full view">
+</div>
+
+<script>
+  (function() {
+    const loginScreen = document.getElementById('loginScreen');
+    const dashboard = document.getElementById('dashboard');
+    const loginBtn = document.getElementById('loginBtn');
+    const usernameInput = document.getElementById('usernameInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const affectionSpan = document.getElementById('affectionCount');
+    let affectionValue = 2719;
+
+    // ----- EMOJI BURST -----
+    function burstEmojis(emoji = '❤️', count = 20) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.innerText = emoji;
+        el.style.position = 'fixed';
+        el.style.pointerEvents = 'none';
+        el.style.fontSize = (Math.random() * 30 + 20) + 'px';
+        el.style.left = (Math.random() * window.innerWidth) + 'px';
+        el.style.top = (Math.random() * window.innerHeight) + 'px';
+        el.style.transition = 'all 1.5s ease';
+        el.style.opacity = '1';
+        el.style.transform = 'scale(1)';
+        el.style.zIndex = '9999';
+        document.body.appendChild(el);
+        setTimeout(() => {
+          el.style.transform = `translate(${Math.random() * 400 - 200}px, ${Math.random() * -400 - 200}px) scale(1.5)`;
+          el.style.opacity = '0';
+        }, 50);
+        setTimeout(() => el.remove(), 1600);
+      }
+    }
+
+    // ----- FEATURE DATA (25 features now!) -----
+    const features = [
+      { 
+        id: 'heartbeat', icon: 'fa-heart', title: 'Heartbeat', desc: 'for you only',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-heart" style="color:#ff3b7f;"></i><div class="info"><h4>❤️ 98 bpm</h4><p>you make it race</p></div></div><div class="item-entry"><i class="fas fa-heart" style="color:#ff7caa;"></i><div class="info"><h4>💓 102 bpm</h4><p>when i see you</p></div></div><div class="item-entry"><i class="fas fa-heartbeat" style="color:#ff3b7f;"></i><div class="info"><h4>💗 110 bpm</h4><p>you're my heartbeat</p></div></div></div>`
+      },
+      { 
+        id: 'kiss', icon: 'fa-kiss', title: 'Kiss sender', desc: '💋 x1000',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-kiss" style="color:#ff3b7f;"></i><div class="info"><h4>💋 1,000 kisses</h4><p>sent with love</p></div></div><div class="item-entry"><i class="fas fa-kiss-wink-heart"></i><div class="info"><h4>💋 500 more</h4><p>for your lips</p></div></div><div class="item-entry"><i class="fas fa-kiss-beam"></i><div class="info"><h4>💋 777 kisses</h4><p>all for you</p></div></div></div>`
+      },
+      { 
+        id: 'star', icon: 'fa-star', title: 'Star notes', desc: 'you shine',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-star" style="color:gold;"></i><div class="info"><h4>⭐ you are my star</h4><p>brightest in my sky</p></div></div><div class="item-entry"><i class="fas fa-star-half-alt"></i><div class="info"><h4>✨ half of my heart</h4><p>you complete me</p></div></div><div class="item-entry"><i class="fas fa-star" style="color:#ffd700;"></i><div class="info"><h4>🌟 superstar</h4><p>you shine brighter</p></div></div></div>`
+      },
+      { 
+        id: 'gem', icon: 'fa-gem', title: 'Diamond', desc: 'you are rare',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-gem" style="color:#b9f2ff;"></i><div class="info"><h4>💎 priceless</h4><p>one of a kind</p></div></div><div class="item-entry"><i class="fas fa-gem" style="color:#f5d4e2;"></i><div class="info"><h4>💎 my treasure</h4><p>forever</p></div></div><div class="item-entry"><i class="fas fa-gem" style="color:#ffd700;"></i><div class="info"><h4>💎 flawless</h4><p>you are perfect</p></div></div></div>`
+      },
+      { 
+        id: 'crown', icon: 'fa-crown', title: 'Queen', desc: 'my queen',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-crown" style="color:gold;"></i><div class="info"><h4>👑 Queen of my heart</h4><p>you reign</p></div></div><div class="item-entry"><i class="fas fa-crown" style="color:#ffd700;"></i><div class="info"><h4>👑 royal blood</h4><p>goddess</p></div></div><div class="item-entry"><i class="fas fa-crown" style="color:#ffb6c1;"></i><div class="info"><h4>👑 my princess</h4><p>you deserve the world</p></div></div></div>`
+      },
+      { 
+        id: 'moon', icon: 'fa-moon', title: 'Moonlight', desc: 'soft glow',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-moon" style="color:#f5e6d3;"></i><div class="info"><h4>🌙 moonbeam</h4><p>you glow</p></div></div><div class="item-entry"><i class="fas fa-cloud-moon"></i><div class="info"><h4>🌙 lunar love</h4><p>soft as night</p></div></div><div class="item-entry"><i class="fas fa-moon" style="color:#e6d5b8;"></i><div class="info"><h4>🌙 moonlight</h4><p>you light up my dark</p></div></div></div>`
+      },
+      { 
+        id: 'dream', icon: 'fa-cloud-moon', title: 'Dream', desc: 'sweet dreams',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-cloud-moon" style="color:#c9b1d0;"></i><div class="info"><h4>💭 dream of you</h4><p>every night</p></div></div><div class="item-entry"><i class="fas fa-cloud-moon"></i><div class="info"><h4>💭 sweetest dreams</h4><p>you are magic</p></div></div><div class="item-entry"><i class="fas fa-cloud-moon" style="color:#b8a0c0;"></i><div class="info"><h4>💭 dreamy</h4><p>you're my fantasy</p></div></div></div>`
+      },
+      { 
+        id: 'sparkles', icon: 'fa-sparkles', title: 'Sparkles', desc: '✨ magic',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-sparkles" style="color:#ffe066;"></i><div class="info"><h4>✨ sparkle queen</h4><p>you shine</p></div></div><div class="item-entry"><i class="fas fa-sparkles"></i><div class="info"><h4>✨ magical</h4><p>you are</p></div></div><div class="item-entry"><i class="fas fa-sparkles" style="color:#ffd700;"></i><div class="info"><h4>✨ glitter</h4><p>you sparkle everywhere</p></div></div></div>`
+      },
+      { 
+        id: 'wine', icon: 'fa-wine-glass', title: 'Wine & dine', desc: 'romantic',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-wine-glass" style="color:#b3416b;"></i><div class="info"><h4>🍷 candlelight</h4><p>with you</p></div></div><div class="item-entry"><i class="fas fa-wine-glass-alt"></i><div class="info"><h4>🍷 dinner for two</h4><p>romantic</p></div></div><div class="item-entry"><i class="fas fa-wine-glass" style="color:#8b0033;"></i><div class="info"><h4>🍷 red wine</h4><p>passion</p></div></div></div>`
+      },
+      { 
+        id: 'oursong', icon: 'fa-music', title: 'our song', desc: 'melody',
+        content: 
+
+        `<div class="item-list">
+          <div class="item-entry song-item" data-song="songs/Indila - Love Story.mp3">▶ play</button></div>
+          <div class="item-entry song-item" data-song="Thinking Out Loud" data-artist="Ed Sheeran"><img src="songs/thinking.jpg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23ff7caa%22/%3E%3Ctext x=%2220%22 y=%2265%22 font-size=%2240%22 fill=%22white%22%3E🎶%3C/text%3E%3C/svg%3E'" alt="cover"><div class="info"><h4>Thinking Out Loud</h4><p>Ed Sheeran</p></div><button class="play-song">▶ play</button></div>
+          <div class="item-entry song-item" data-song="All of Me" data-artist="John Legend"><img src="songs/allofme.jpg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23ff7caa%22/%3E%3Ctext x=%2220%22 y=%2265%22 font-size=%2240%22 fill=%22white%22%3E🎤%3C/text%3E%3C/svg%3E'" alt="cover"><div class="info"><h4>All of Me</h4><p>John Legend</p></div><button class="play-song">▶ play</button></div>
+          <div class="item-entry song-item" data-song="I'm Yours" data-artist="Jason Mraz"><img src="songs/imyours.jpg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23ff7caa%22/%3E%3Ctext x=%2215%22 y=%2265%22 font-size=%2240%22 fill=%22white%22%3E🎸%3C/text%3E%3C/svg%3E'" alt="cover"><div class="info"><h4>I'm Yours</h4><p>Jason Mraz</p></div><button class="play-song">▶ play</button></div>
+          <div class="item-entry song-item" data-song="Love Story" data-artist="Taylor Swift"><img src="songs/lovestory.jpg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23ff7caa%22/%3E%3Ctext x=%2218%22 y=%2265%22 font-size=%2240%22 fill=%22white%22%3E🎹%3C/text%3E%3C/svg%3E'" alt="cover"><div class="info"><h4>Love Story</h4><p>Taylor Swift</p></div><button class="play-song">▶ play</button></div>
+        </div>`
+      },
+      { 
+        id: 'gift', icon: 'fa-gift', title: 'surprise', desc: 'daily treat',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-gift" style="color:#ff7caa;"></i><div class="info"><h4>🎁 surprise for you</h4><p>daily love</p></div></div><div class="item-entry"><i class="fas fa-gift"></i><div class="info"><h4>🎁 just because</h4><p>you deserve it</p></div></div><div class="item-entry"><i class="fas fa-gift" style="color:#ff3b7f;"></i><div class="info"><h4>🎁 love package</h4><p>unwrapping hearts</p></div></div></div>`
+      },
+      { 
+        id: 'moments', icon: 'fa-camera', title: 'moments', desc: 'capture us',
+        content: `<div class="modal-gallery" id="galleryContainer">
+          <img class="gallery-img" src="pics/meme.png" alt="moment 1">
+          <img class="gallery-img" src="pics/2.png" alt="moment 2">
+          <img class="gallery-img" src="pics/3.png" alt="moment 3">
+          <img class="gallery-img" src="pics/4.png" alt="moment 4">
+          <img class="gallery-img" src="pics/5.png" alt="moment 5">
+          <img class="gallery-img" src="pics/6.png" alt="moment 6">
+          <img class="gallery-img" src="pics/7.png" alt="moment 7">
+          <img class="gallery-img" src="pics/8.png" alt="moment 8">
+          <img class="gallery-img" src="pics/9.png" alt="moment 9">
+          <img class="gallery-img" src="pics/10.png" alt="moment 10">
+          <img class="gallery-img" src="pics/11.png" alt="moment 11">
+          <img class="gallery-img" src="pics/12.png" alt="moment 12">
+          <img class="gallery-img" src="pics/13.png" alt="moment 13">
+          <img class="gallery-img" src="pics/14.png" alt="moment 14">
+          <img class="gallery-img" src="pics/meme.png" alt="moment 15">
+        </div>`
+      },
+      { 
+        id: 'letters', icon: 'fa-book', title: 'love letters', desc: 'eternal',
+        content: `<div class="item-list">
+          <div class="item-entry"><i class="fas fa-book" style="color:#ff7caa;"></i><div class="info"><h4>📖 letter #1</h4><div class="letter-text">"From the moment I saw you, I knew you were special. Your smile lights up my world, and I find myself thinking about you constantly. I'm completely crushing on you, and I want nothing more than to make you my girl."</div></div></div>
+          <div class="item-entry"><i class="fas fa-book-open"></i><div class="info"><h4>📖 letter #2</h4><div class="letter-text">"Every day I fall harder for you. Your laugh is music, your eyes are poetry. I want to hold your hand, walk with you, and build a future together. Please say yes to being mine."</div></div></div>
+          <div class="item-entry"><i class="fas fa-book" style="color:#ff3b7f;"></i><div class="info"><h4>📖 letter #3</h4><div class="letter-text">"I can't stop thinking about you. You're the first thought in my morning and the last in my night. I want to be the one who makes you smile every day. Will you be my girlfriend?"</div></div></div>
+        </div>`
+      },
+      { 
+        id: 'smile', icon: 'fa-smile', title: 'your smile', desc: 'sunshine',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-smile" style="color:#ffd700;"></i><div class="info"><h4>😊 your smile</h4><p>brightens my day</p></div></div><div class="item-entry"><i class="fas fa-smile-wink"></i><div class="info"><h4>😉 wink</h4><p>you know</p></div></div><div class="item-entry"><i class="fas fa-smile-beam"></i><div class="info"><h4>😄 radiant</h4><p>you light up my life</p></div></div></div>`
+      },
+      { 
+        id: 'feather', icon: 'fa-feather', title: 'feather touch', desc: 'gentle',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-feather" style="color:#d4b8c0;"></i><div class="info"><h4>🪶 soft touch</h4><p>gentle love</p></div></div><div class="item-entry"><i class="fas fa-feather-alt"></i><div class="info"><h4>🪶 tender</h4><p>caress</p></div></div><div class="item-entry"><i class="fas fa-feather" style="color:#c9a0b0;"></i><div class="info"><h4>🪶 whisper</h4><p>soft like you</p></div></div></div>`
+      },
+      { 
+        id: 'passion', icon: 'fa-fire', title: 'passion', desc: 'burning',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-fire" style="color:#ff4500;"></i><div class="info"><h4>🔥 fire</h4><p>passion burns</p></div></div><div class="item-entry"><i class="fas fa-fire" style="color:#ff6348;"></i><div class="info"><h4>🔥 desire</h4><p>for you</p></div></div><div class="item-entry"><i class="fas fa-fire" style="color:#ff3b7f;"></i><div class="info"><h4>🔥 flame</h4><p>eternal fire</p></div></div></div>`
+      },
+      { 
+        id: 'lips', icon: 'fa-lips', title: 'lips', desc: 'honey',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-lips" style="color:#ff6f91;"></i><div class="info"><h4>💋 lips like honey</h4><p>sweet</p></div></div><div class="item-entry"><i class="fas fa-lips" style="color:#ff3b7f;"></i><div class="info"><h4>💋 kissable</h4><p>irresistible</p></div></div><div class="item-entry"><i class="fas fa-lips" style="color:#ff1493;"></i><div class="info"><h4>💋 delicious</h4><p>I crave you</p></div></div></div>`
+      },
+      { 
+        id: 'devotion', icon: 'fa-hand-holding-heart', title: 'devotion', desc: 'all in',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-hand-holding-heart" style="color:#ff7caa;"></i><div class="info"><h4>🤲 my heart</h4><p>all for you</p></div></div><div class="item-entry"><i class="fas fa-hand-holding-heart"></i><div class="info"><h4>🤲 devotion</h4><p>eternal</p></div></div><div class="item-entry"><i class="fas fa-hand-holding-heart" style="color:#ff3b7f;"></i><div class="info"><h4>🤲 complete</h4><p>you have all of me</p></div></div></div>`
+      },
+      { 
+        id: 'ring', icon: 'fa-ring', title: 'promise', desc: 'forever',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-ring" style="color:#ffd700;"></i><div class="info"><h4>💍 promise ring</h4><p>forever</p></div></div><div class="item-entry"><i class="fas fa-ring" style="color:#c0c0c0;"></i><div class="info"><h4>💍 eternal bond</h4><p>i do</p></div></div><div class="item-entry"><i class="fas fa-ring" style="color:#ffb6c1;"></i><div class="info"><h4>💍 forever yours</h4><p>always</p></div></div></div>`
+      },
+      { 
+        id: 'infinity', icon: 'fa-infinity', title: 'infinite', desc: 'no end',
+        content: `<div class="item-list"><div class="item-entry"><i class="fas fa-infinity" style="color:#ff7caa;"></i><div class="info"><h4>∞ infinite love</h4><p>no end</p></div></div><div class="item-entry"><i class="fas fa-infinity"></i><div class="info"><h4>∞ forever</h4><p>you & me</p></div></div><div class="item-entry"><i class="fas fa-infinity" style="color:#ff3b7f;"></i><div class="info"><h4>∞ endless</h4><p>our love never stops</p></div></div></div>`
+      },
+      { 
+        id: 'days', icon: 'fa-clock', title: 'since we met', desc: 'feb 2023',
+        content: `<div class="days-counter" id="daysCounter">
+          <div class="time-unit"><div class="number" id="daysNum">0</div><div class="label">days</div></div>
+          <div class="time-unit"><div class="number" id="hoursNum">0</div><div class="label">hours</div></div>
+          <div class="time-unit"><div class="number" id="minutesNum">0</div><div class="label">minutes</div></div>
+          <div class="time-unit"><div class="number" id="yearsNum">0</div><div class="label">years</div></div>
+        </div>`
+      },
+      // NEW FEATURES!
+      { 
+        id: 'sunset', icon: 'fa-sun', title: 'Sunset dates', desc: 'golden hour',
+        content: `<div class="surprise-box"><i class="fas fa-sun" style="color:#ffd700;"></i><h3>🌅 Sunset with you</h3><p>Every sunset reminds me of your beauty. Let's watch the golden sky together, hand in hand, forever.</p><div class="item-list"><div class="item-entry"><i class="fas fa-sun" style="color:#ffa500;"></i><div class="info"><h4>🌅 7:23 PM</h4><p>perfect timing with you</p></div></div><div class="item-entry"><i class="fas fa-cloud-sun" style="color:#ffb347;"></i><div class="info"><h4>☀️ golden hour</h4><p>you shine brighter</p></div></div></div></div>`
+      },
+      { 
+        id: 'stargazing', icon: 'fa-star', title: 'Stargazing', desc: 'under the stars',
+        content: `<div class="surprise-box"><i class="fas fa-star" style="color:#ffd700;"></i><h3>✨ Stargazing with you</h3><p>Under the infinite sky, I see forever in your eyes. Each star is a promise of my love for you.</p><div class="item-list"><div class="item-entry"><i class="fas fa-star" style="color:#ffd700;"></i><div class="info"><h4>⭐ 1000 stars</h4><p>each one for you</p></div></div><div class="item-entry"><i class="fas fa-meteor" style="color:#ff6b6b;"></i><div class="info"><h4>☄️ shooting star</h4><p>my wish came true</p></div></div></div></div>`
+      },
+      { 
+        id: 'cuddles', icon: 'fa-bed', title: 'Cuddle corner', desc: 'warm & cozy',
+        content: `<div class="surprise-box"><i class="fas fa-bed" style="color:#ff7caa;"></i><h3>🛏️ Cuddle time</h3><p>Wrapped in your arms is where I belong. Warm, safe, and full of love.</p><div class="item-list"><div class="item-entry"><i class="fas fa-heart" style="color:#ff3b7f;"></i><div class="info"><h4>❤️ 100% cozy</h4><p>with you</p></div></div><div class="item-entry"><i class="fas fa-hotdog" style="color:#ffb6c1;"></i><div class="info"><h4>🌭 snuggle</h4><p>perfect warmth</p></div></div></div></div>`
+      },
+      { 
+        id: 'adventure', icon: 'fa-plane', title: 'Adventure', desc: 'explore together',
+        content: `<div class="surprise-box"><i class="fas fa-plane" style="color:#87ceeb;"></i><h3>✈️ Our adventure</h3><p>Every journey is better with you. Let's explore the world, one memory at a time.</p><div class="item-list"><div class="item-entry"><i class="fas fa-map-marked-alt" style="color:#ff7caa;"></i><div class="info"><h4>🗺️ 100 destinations</h4><p>all with you</p></div></div><div class="item-entry"><i class="fas fa-hiking" style="color:#8fbc8f;"></i><div class="info"><h4>🥾 hiking</h4><p>hand in hand</p></div></div></div></div>`
+      },
+      { 
+        id: 'coffee', icon: 'fa-mug-hot', title: 'Coffee dates', desc: 'morning love',
+        content: `<div class="surprise-box"><i class="fas fa-mug-hot" style="color:#8b4513;"></i><h3>☕ Coffee with you</h3><p>Waking up to your smile is better than any coffee. Let's have endless coffee dates.</p><div class="item-list"><div class="item-entry"><i class="fas fa-mug-hot" style="color:#a0522d;"></i><div class="info"><h4>☕ 365 mornings</h4><p>each one special</p></div></div><div class="item-entry"><i class="fas fa-coffee" style="color:#6f4e37;"></i><div class="info"><h4>☕ latte love</h4><p>sweet like you</p></div></div></div></div>`
+      },
+      { 
+        id: 'spark', icon: 'fa-bolt', title: 'The Spark', desc: 'electric love',
+        content: `<div class="surprise-box"><i class="fas fa-bolt" style="color:#ffd700;"></i><h3>⚡ Electric connection</h3><p>The moment I saw you, there was a spark. It's grown into an inferno of love.</p><div class="item-list"><div class="item-entry"><i class="fas fa-bolt" style="color:#ff6b6b;"></i><div class="info"><h4>⚡ 1000 volts</h4><p>of pure love</p></div></div><div class="item-entry"><i class="fas fa-lightbulb" style="color:#ffd700;"></i><div class="info"><h4>💡 you light up</h4><p>my entire world</p></div></div></div></div>`
+      }
+    ];
+
+    // ----- render features -----
+    function renderFeatures() {
+      const grid = document.getElementById('featureGrid');
+      grid.innerHTML = '';
+      features.forEach(f => {
+        const item = document.createElement('div');
+        item.className = 'feature-item';
+        item.dataset.id = f.id;
+        item.innerHTML = `<i class="fas ${f.icon}"></i><h4>${f.title}</h4><p>${f.desc}</p>`;
+        item.addEventListener('click', () => {
+          openModal(f);
+          burstEmojis('❤️', 15);
+        });
+        grid.appendChild(item);
+      });
+    }
+
+    // ----- MODAL -----
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalContent = document.getElementById('modalContent');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(feature) {
+      modalTitle.innerText = `✨ ${feature.title}`;
+      modalBody.innerHTML = feature.content;
+      modalOverlay.classList.add('active');
+      
+      // attach song play events
+      document.querySelectorAll('.song-item .play-song').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const parent = this.closest('.song-item');
+          const song = parent.dataset.song;
+          const artist = parent.dataset.artist;
+          const audio = new Audio(`songs/${song.toLowerCase().replace(/ /g,'')}.mp3`);
+          audio.play().catch(() => {
+            alert(`🎵 Now playing: "${song}" by ${artist} ❤️ (imagine the melody)`);
+          });
+          burstEmojis('🎵', 10);
+          this.innerText = '▶ playing';
+          this.style.background = '#ff7caa';
+          setTimeout(() => { this.innerText = '▶ play'; this.style.background = ''; }, 1500);
+        });
+      });
+
+      // gallery click to fullscreen
+      document.querySelectorAll('.gallery-img').forEach(img => {
+        img.addEventListener('click', function() {
+          const fullscreen = document.getElementById('fullscreenImg');
+          const fullImg = document.getElementById('fullscreenImgSrc');
+          fullImg.src = this.src;
+          fullscreen.classList.add('active');
+          burstEmojis('📸', 10);
+        });
+      });
+
+      // update days counter if this is the days feature
+      if (feature.id === 'days') {
+        updateDaysCounter();
+        if (window.daysInterval) clearInterval(window.daysInterval);
+        window.daysInterval = setInterval(updateDaysCounter, 60000);
+      } else {
+        if (window.daysInterval) clearInterval(window.daysInterval);
+      }
+
+      affectionValue += 5;
+      affectionSpan.innerText = affectionValue.toLocaleString();
+    }
+
+    function updateDaysCounter() {
+      const start = new Date('2023-02-01');
+      const now = new Date();
+      const diff = now - start;
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      const years = Math.floor(days / 365);
+      
+      const daysNum = document.getElementById('daysNum');
+      const hoursNum = document.getElementById('hoursNum');
+      const minutesNum = document.getElementById('minutesNum');
+      const yearsNum = document.getElementById('yearsNum');
+      
+      if (daysNum) daysNum.innerText = days % 365;
+      if (hoursNum) hoursNum.innerText = hours % 24;
+      if (minutesNum) minutesNum.innerText = minutes % 60;
+      if (yearsNum) yearsNum.innerText = years;
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      if (window.daysInterval) clearInterval(window.daysInterval);
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+
+    // FULLSCREEN IMAGE CLOSE
+    const fullscreenImg = document.getElementById('fullscreenImg');
+    fullscreenImg.addEventListener('click', function() {
+      this.classList.remove('active');
+    });
+
+    // ----- LOGIN -----
+    function login() {
+      const name = usernameInput.value.trim() || 'babe';
+      if (name.length > 0) {
+        loginScreen.style.display = 'none';
+        dashboard.style.display = 'block';
+        document.querySelector('.profile-name').innerHTML = `${name} <small>✨ 4ever</small>`;
+        affectionValue += 11;
+        affectionSpan.innerText = affectionValue.toLocaleString();
+        document.getElementById('rotatingQuote').innerText = 'you are my universe';
+        dashboard.style.animation = 'none';
+        setTimeout(() => dashboard.style.animation = 'fadeGlow 0.8s ease', 10);
+        burstEmojis('💖', 30);
+      } else {
+        usernameInput.placeholder = 'type anything, love ❤️';
+        usernameInput.style.borderColor = '#ff3b7f';
+      }
+    }
+
+    function logout() {
+      dashboard.style.display = 'none';
+      loginScreen.style.display = 'flex';
+      closeModal();
+      if (window.daysInterval) clearInterval(window.daysInterval);
+    }
+
+    loginBtn.addEventListener('click', login);
+    logoutBtn.addEventListener('click', logout);
+    usernameInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
+    passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
+
+    // affection click
+    document.getElementById('affectionDisplay').addEventListener('click', function() {
+      affectionValue += 50;
+      affectionSpan.innerText = affectionValue.toLocaleString();
+      burstEmojis('💗', 25);
+      alert('❤️ +50 affection! you are amazing!');
+    });
+
+    // quote rotation
+    const quotes = ['you are my universe', 'every day i fall more', 'sexy & brilliant', 'my heart is yours', 'you make me weak', 'eternal flame', 'your smile is magic', 'i adore you', 'my only one', 'love you infinity', 'you are art', 'breathtaking'];
+    let qi = 0;
+    setInterval(() => {
+      if (dashboard.style.display !== 'none') {
+        qi = (qi + 1) % quotes.length;
+        document.getElementById('rotatingQuote').innerText = quotes[qi];
+      }
+    }, 7000);
+
+    // auto affection
+    setInterval(() => {
+      if (dashboard.style.display !== 'none') {
+        affectionValue += 2;
+        affectionSpan.innerText = affectionValue.toLocaleString();
+      }
+    }, 4000);
+
+    renderFeatures();
+    usernameInput.value = 'my love';
+    passwordInput.value = 'love';
+  })();
+</script>
+</body>
+</html>
